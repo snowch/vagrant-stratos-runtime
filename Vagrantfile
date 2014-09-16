@@ -89,12 +89,6 @@ $setup_stratos_script = <<SCRIPT
 
   sudo apt-get install -y curl sed
 
-  # copy iaas conf file if it doesn't already exist
-  [ -e iaas.conf ] || cp /vagrant/iaas.conf.example /home/vagrant/iaas.conf
-
-  # remove the example text from the first two lines
-  sed -i '1,2d' iaas.conf
-
   # install docker
   curl -s https://get.docker.io/ubuntu/ | sudo sh
   sudo ln -sf /usr/bin/docker.io /usr/local/bin/docker
@@ -102,15 +96,6 @@ $setup_stratos_script = <<SCRIPT
 
   sudo gpasswd -a ${USER} docker
   sudo service docker restart
-
-  # pull down the stratos images
-  # TODO move the version to a variable
-  # docker pull apachestratos/stratos:4.1.0-SNAPSHOT
-  # docker pull apachestratos/activemq:4.1.0-SNAPSHOT
-  # docker pull apachestratos/mysql:4.1.0-SNAPSHOT
-  # docker pull apachestratos/puppettestnode:4.1.0-SNAPSHOT
-  # docker pull apachestratos/puppetmaster:4.1.0-SNAPSHOT
-  # docker pull apachestratos/bind:4.1.0-SNAPSHOT
 
   # fetch a script to run the docker instances
   wget "https://git-wip-us.apache.org/repos/asf?p=stratos.git;a=blob_plain;f=tools/stratos-docker-images/run-example.sh;hb=HEAD" -O /home/vagrant/run-example.sh
